@@ -75,4 +75,18 @@ public class TiendaTests
 
         mockProducto.Verify(p => p.ActualizarPrecio(80m), Times.Once);
     }
+
+    [Fact]
+    public void CalcularTotalCarrito_ConDescuentosAplicados_DeberiaCalcularTotalCorrecto()
+    {
+        var teclado = new Producto("Teclado", 50m, "Accesorios");
+        _tienda.AgregarProducto(teclado);
+
+        _tienda.AplicarDescuento("Teclado",20m);
+        var carrito = new List<string>{"Teclado", "Mouse"};
+
+        decimal totalCalculado = _tienda.CalcularTotalCarrito(carrito);
+        // mouse = 25m y teclado = pasa de 50m a 40m -> total esperado = 65
+        Assert.Equal(65m, totalCalculado);
+    }
 }
