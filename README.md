@@ -37,7 +37,7 @@
 - **Mocks:** Objetos preconfigurados con expectativas específicas que verifican de manera activa si se produjeron las interacciones esperadas (por ejemplo, verificar que el método ActualizarPrecio fue llamado exactamente una vez con un parámetro determinado).
 
 ## Punto 4 -
-**-Defina usando palabras propias y según la práctica realizada qué es un fixture.** 
+**Defina usando palabras propias y según la práctica realizada qué es un fixture.** 
 - Un fixture es un mecanismo que permite configurar un conjunto de datos de prueba predecible y reutilizable antes de ejecutar los test.
 En este caso, el fixture fue el constructor de "TiendaTests", donde inicializamos la clase Tienda y precargamos productos para no tener que instanciarlos repetidamente en cada método de prueba.
 
@@ -47,7 +47,7 @@ El enfoque de prueba que estamos aplicando sería el de caja blanca, ya que en c
 
 **Explique los conceptos de Setup y Teardown en testing.**
 - Setup: etapa inicial donde se preparan las condiciones, dependencias y datos necesarios antes de correr las pruebas.
-Teardown: etapa posterior a la ejecución de la prueba, encargada de liberar recursos, borrar datos temporales o cerrar conexiones.
+- Teardown: etapa posterior a la ejecución de la prueba, encargada de liberar recursos, borrar datos temporales o cerrar conexiones.
 
 ## Punto 5 -
 **¿Realizó una prueba de cobertura completa? ¿Qué tipo de cobertura utilizó?**
