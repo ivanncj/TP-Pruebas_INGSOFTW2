@@ -49,4 +49,15 @@ public class Tienda
 
         producto.ActualizarPrecio(nuevoPrecio);
     }
+
+    public decimal CalcularTotalCarrito(List<string> nombresProductos)
+    {
+        decimal total = 0m;
+        foreach(var nombre in nombresProductos)
+        {
+            var producto = BuscarProducto(nombre);
+            total += producto.Precio;
+        }
+        return total;
+    }
 }
