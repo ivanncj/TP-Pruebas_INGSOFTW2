@@ -3,14 +3,14 @@
 public class Tienda
 {
     
-    public List<Producto> Inventario { get; set; }
+    public List<IProducto> Inventario { get; set; }
 
     public Tienda()
     {
-        Inventario = new List<Producto>();
+        Inventario = new List<IProducto>();
     }
 
-    public void AgregarProducto(Producto producto)
+    public void AgregarProducto(IProducto producto)
     {
         if (producto != null)
         {
@@ -18,7 +18,7 @@ public class Tienda
         }
     }
 
-    public Producto BuscarProducto(string nombre)
+    public IProducto BuscarProducto(string nombre)
     {
         var producto = Inventario.FirstOrDefault(p => p.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
         if (producto == null)
@@ -33,5 +33,20 @@ public class Tienda
         var producto = BuscarProducto(nombre);
         Inventario.Remove(producto);
         return true;
+    }
+
+    public void AplicarDescuento(string nombreProducto, decimal porcentajeDescuento)
+    {
+        if (porcentajeDescuento < 0 || porcentajeDescuento > 100)
+        {
+            throw new ArgumentException("El porcentaje de descuento debe estar entre 0 y 100.");
+        }
+
+        var producto = BuscarProducto(nombreProducto);
+        
+        decimal descuentoMonto = producto.Precio * (porcentajeDescuento / 100m);
+        decimal nuevoPrecio = producto.Precio - descuentoMonto;
+
+        producto.ActualizarPrecio(nuevoPrecio);
     }
 }

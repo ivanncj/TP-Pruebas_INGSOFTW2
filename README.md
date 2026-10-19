@@ -1,7 +1,7 @@
 # Trabajo Práctico: Pruebas del Software - Uso de un Framework de Testing
 
 * **Lenguaje utilizado:** C#
-* **Frameworks:** .NET / xUnit
+* **Frameworks y Librerias:** .NET / xUnit y Moq 
 
 ## Integrantes
 * Cantos Jimenez, Fabricio Ivan

@@ -1,5 +1,6 @@
 using Xunit;
 using TiendaApp;
+using Moq;
 
 namespace TiendaApp.Tests;
 
@@ -47,20 +48,37 @@ public class TiendaTests
     [Fact]
     public void BuscarProducto_NoExistente_DeberiaLanzarKeyNotFoundException()
     {
-        // Arrange
+        
         var tienda = new Tienda();
 
-        // Act & Assert
+        
         Assert.Throws<KeyNotFoundException>(() => tienda.BuscarProducto("Teclado Inexistente"));
     }
 
     [Fact]
     public void EliminarProducto_NoExistente_DeberiaLanzarExcepcion()
     {
-        // Arrange
+        
         var tienda = new Tienda();
 
-        // Act & Assert
         Assert.Throws<KeyNotFoundException>(() => tienda.EliminarProducto("ProductoFantasma"));
+    }
+
+    [Fact]
+    public void AplicarDescuento_DeberiaCalcularNuevoPrecioYLlamarActualizarPrecio_UsandoMock()
+    {
+        
+        var tienda = new Tienda();
+        
+        var mockProducto = new Mock<IProducto>();
+        mockProducto.Setup(p => p.Nombre).Returns("Campera");
+        mockProducto.Setup(p => p.Precio).Returns(100m);
+
+        tienda.AgregarProducto(mockProducto.Object);
+
+        
+        tienda.AplicarDescuento("Campera", 20m);
+
+        mockProducto.Verify(p => p.ActualizarPrecio(80m), Times.Once);
     }
 }

@@ -1,6 +1,13 @@
 namespace TiendaApp;
 
-public class Producto
+public interface IProducto
+{
+    string Nombre { get; set; }
+    decimal Precio { get; set; }
+    string Categoria { get; set; }
+    void ActualizarPrecio(decimal nuevoPrecio);
+}
+public class Producto : IProducto
 {
     public string Nombre { get; set; }
     public decimal Precio { get; set; }
