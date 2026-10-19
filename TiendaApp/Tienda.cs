@@ -20,18 +20,18 @@ public class Tienda
 
     public Producto BuscarProducto(string nombre)
     {
-        return Inventario.FirstOrDefault(p => p.Nombre == nombre);
+        var producto = Inventario.FirstOrDefault(p => p.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
+        if (producto == null)
+        {
+            throw new KeyNotFoundException($"El producto '{nombre}' no fue encontrado en el inventario.");
+        }
+        return producto;
     }
 
     public bool EliminarProducto(string nombre)
     {
         var producto = BuscarProducto(nombre);
-
-        if (producto != null)
-        {
-            Inventario.Remove(producto);
-            return true;
-        }
-        return false;
+        Inventario.Remove(producto);
+        return true;
     }
 }

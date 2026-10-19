@@ -32,16 +32,6 @@ public class TiendaTests
     }
 
     [Fact]
-    public void BuscarProducto_NoExistente_DeberiaRetornarNull()
-    {
-        var tienda = new Tienda();
-
-        var encontrado = tienda.BuscarProducto("Teclado Inexistente");
-
-        Assert.Null(encontrado);
-    }
-
-    [Fact]
     public void EliminarProducto_Existente_DeberiaRemoverloDelInventario()
     {
         var tienda = new Tienda();
@@ -51,6 +41,26 @@ public class TiendaTests
         bool eliminado = tienda.EliminarProducto("Monitor");
 
         Assert.True(eliminado);
-        Assert.Null(tienda.BuscarProducto("Monitor"));
+        Assert.Throws<KeyNotFoundException>(() => tienda.BuscarProducto("Monitor"));
+    }
+
+    [Fact]
+    public void BuscarProducto_NoExistente_DeberiaLanzarKeyNotFoundException()
+    {
+        // Arrange
+        var tienda = new Tienda();
+
+        // Act & Assert
+        Assert.Throws<KeyNotFoundException>(() => tienda.BuscarProducto("Teclado Inexistente"));
+    }
+
+    [Fact]
+    public void EliminarProducto_NoExistente_DeberiaLanzarExcepcion()
+    {
+        // Arrange
+        var tienda = new Tienda();
+
+        // Act & Assert
+        Assert.Throws<KeyNotFoundException>(() => tienda.EliminarProducto("ProductoFantasma"));
     }
 }
